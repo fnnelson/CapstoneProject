@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import '../App/App.css'
 import { useNavigate } from 'react-router-dom';
 import OneProject from "./OneProject";
 
 function Projects({ urlBase }) {
     const navigateTo = useNavigate();
+    const allProjects = useSelector((store) => store.projects.allProjects);
 
     const [projectNameInput, setProjectNameInput] = useState("");
     const [projectsFetched, setProjectsFetched] = useState([])
