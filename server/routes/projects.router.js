@@ -8,10 +8,10 @@ router.get('/', (req, res) => {
     // mongo query goes here
 
     //using dummy json data to start
-    fetch('https://dummyjson.com/products/1')
+    fetch('https://dummyjson.com/products')
         .then(response => response.json())
         .then((json) => {
-            res.status(200).send(json);
+            res.status(200).send(json.products);
         })
         .catch((err) => {
             res.status(501).send({ alert: "Error getting projects" }, err);
