@@ -1,0 +1,21 @@
+.project {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .project h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .project p {
+    margin: 5px 0;
+  }
+  
+  .project img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+  }

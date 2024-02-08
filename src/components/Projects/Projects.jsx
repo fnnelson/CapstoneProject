@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
+import '../App/App.css'
+import { useNavigate } from 'react-router-dom';
+import OneProject from "./OneProject";
 
 function Projects({ urlBase }) {
+    const navigateTo = useNavigate();
+
     const [projectNameInput, setProjectNameInput] = useState("");
     const [projectsFetched, setProjectsFetched] = useState([])
 
@@ -46,6 +51,11 @@ function Projects({ urlBase }) {
             console.error('Error while sending data:', error);
         }
     };
+
+    const handleViewDetailsClick = (project) => {
+        console.log("project to send to reducer", project);
+    };
+
     return (
         <>
             <div className='project-form'>
@@ -73,7 +83,8 @@ function Projects({ urlBase }) {
                         <p>Category: {project.category}</p>
                         <p>Description: {project.description}</p>
                         <p>Price: {project.price}</p>
-                        <img style={{height: '100px'}} src={project.thumbnail} alt="Thumbnail" />
+                        <img style={{ height: '100px' }} src={project.thumbnail} alt="Thumbnail" />
+                        <button onClick={() => handleViewDetailsClick(project)}>View Details</button>
                     </div>
                 ))}
             </div>
