@@ -56,6 +56,8 @@ function Projects({ urlBase }) {
 
     const handleViewDetailsClick = (project) => {
         console.log("project to send to reducer", project);
+        // then go to details page for OneProject component
+        navigateTo("/project")
     };
 
     return (
