@@ -42,7 +42,7 @@ function OneProject() {
         <>
             <h1>One Project</h1>
             <div>
-                <h2>Project # {project.project_id}</h2>
+                <h2>Project {project.project_name}</h2>
                 <p>Team Size: {project.team_size}</p>
                 <p>Workload: {project.workload}</p>
                 <p>Budget: {project.budget}</p>

@@ -95,8 +95,9 @@ function Projects() {
             <h1>Your Projects</h1>
             <div className="projects">
                 {projectsFetched.map((project) => (
-                    <div key={project.project_id} className="project">
-                        <h2>Project # {project.project_id}</h2>
+
+                    <div key={project.id} className="project">
+                        <h2>Project {project.project_name}</h2>
                         <p>Team Size: {project.team_size}</p>
                         <p>Workload: {project.workload}</p>
                         <p>Budget: {project.budget}</p>
