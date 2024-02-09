@@ -2,8 +2,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import '../App/App.css'
 
-function TaskItem({ urlBase, task, fetchTasks }) {
+function TaskItem({ task, fetchTasks }) {
     const dispatch = useDispatch();
+    const urlBase = 'http://localhost:3000'
 
     const [currentStatus, setCurrentStatus] = useState(task.status)
 
