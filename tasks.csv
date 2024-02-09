@@ -1,4 +1,4 @@
-task_id,project_id,user_id,status,estimated_duration (hrs),due_date,description
+task_id,project_id,user_id,status,estimated_duration,due_date,description
 1,1,121,incomplete,2,2024-02-26,Design and implement user progress tracking
 2,2,80,complete,2,2024-02-14,Create user forums
 3,3,282,incomplete,1,2024-02-21,Implement user account deactivation process
