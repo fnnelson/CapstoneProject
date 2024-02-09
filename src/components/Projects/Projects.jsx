@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import '../App/App.css'
 import { useNavigate } from 'react-router-dom';
+import '../App/App.css'
 // import OneProject from "./OneProject";
 
 function Projects({ urlBase }) {
@@ -94,12 +94,11 @@ function Projects({ urlBase }) {
             <div className="projects">
                 {projectsFetched.map((project) => (
                     <div key={project.id} className="project">
-                        <h2>{project.title}</h2>
-                        <p>Brand: {project.brand}</p>
-                        <p>Category: {project.category}</p>
-                        <p>Description: {project.description}</p>
-                        <p>Price: {project.price}</p>
-                        <img style={{ height: '100px' }} src={project.thumbnail} alt="Thumbnail" />
+                        <h2>Project # {project.project_id}</h2>
+                        <p>Team Size: {project.team_size}</p>
+                        <p>Workload: {project.workload}</p>
+                        <p>Budget: {project.budget}</p>
+                        <p>Completion Time: {project.completion_time}</p>
                         <br />
                         <button onClick={() => handleViewDetailsClick(project)}>View Details</button>
                     </div>
