@@ -14,7 +14,7 @@ router.get('/:id', (req, res) => {
             res.status(200).send(data);
         })
         .catch((err) => {
-            res.status(501).send({ alert: "Error getting all projects" }, err);
+            res.status(501).send({ alert: "Error getting all tasks" }, err);
         });
 
 })
@@ -28,11 +28,21 @@ router.post('/', (req, res) => {
 })
 
 // EDIT (put) task
-router.put('/', (req, res) => {
-    console.log("task EDIT made it to server", req.body);
+router.put('/task/:id', (req, res) => {
+    let taskId = Number(req.params.id);
+    let newStatus = req.body;
+    console.log("task EDIT made it to server", taskId);
+    console.log("data to update", req.body)
     // mongo query goes here
-    const newProject = req.body;
-    res.status(201).send(newProject);
+    // update query here
+    // let data = tasks.find({ "project_id": taskId }).toArray();
+    // data
+    //     .then((data) => {
+    //         res.status(202).send(data);
+    //     })
+    //     .catch((err) => {
+    //         res.status(501).send({ alert: "Error updating task" }, err);
+    //     });
 })
 
 // DELETE project
