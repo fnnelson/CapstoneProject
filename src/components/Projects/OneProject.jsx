@@ -1,6 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import '../App/App.css'
+import TaskItem from './TaskItem';
 
 function OneProject({ urlBase }) {
     const dispatch = useDispatch();
@@ -48,14 +49,7 @@ function OneProject({ urlBase }) {
             <h1>Tasks Associated to this project</h1>
             <div className="tasks">
                 {tasksFetched.map((task) => (
-                    <div key={task.task_id} className="task">
-                        <h2>Task: {task.description}</h2>
-                        <p>Due Date: {task.due_date}</p>
-                        <p>Estimated Duration: {task.estimated_duration}</p>
-                        <p>Project #: {task.project_id}</p>
-                        <p>Status: {task.status}</p>
-                        <br />
-                    </div>
+                    <TaskItem key={task.task_id} task={task} fetchTasks={fetchTasks} urlBase={urlBase} />
                 ))}
             </div>
         </>
