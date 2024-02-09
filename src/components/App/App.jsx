@@ -5,6 +5,7 @@ import Projects from '../Projects/Projects';
 import OneProject from '../Projects/OneProject';
 import LoginPage from '../Login/LoginPage';
 import './App.css';
+import EmployeeTasks from '../Projects/EmployeeTasks';
 
 function App() {
   const dispatch = useDispatch();
@@ -16,13 +17,13 @@ function App() {
 
   return (
     <>
-      <h1>Project Management App</h1>
       <Router>
         <Routes>
           <Route path="/" element={<LoginOrRedirect user={user} />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/projects" element={user.user_id ? <Projects /> : <Navigate to="/login" />} />
           <Route path="/viewproject" element={user.user_id ? <OneProject /> : <Navigate to="/login" />} />
+          <Route path="/employeetasks" element={user.user_id ? <EmployeeTasks /> : <Navigate to="/login" />} />
         </Routes>
       </Router>
     </>
