@@ -1,4 +1,4 @@
-project_id,project_name,team_size,budget,workload,completion_time (days)
+project_id,project_name,team_size,budget,workload,completion_time
 1,Crawford,4,14000,L,3.0
 2,Espinoza,3,20000,S,2.0
 3,Thomas,5,52000,L,4.0
