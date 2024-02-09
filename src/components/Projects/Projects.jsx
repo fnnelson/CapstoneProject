@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 function Projects({ urlBase }) {
     const navigateTo = useNavigate();
     const dispatch = useDispatch();
-    // const allProjects = useSelector((store) => store.projects.allProjects);
+    const allProjects = useSelector((store) => store.projects.allProjects);
 
     const [projectNameInput, setProjectNameInput] = useState("");
     const [projectsFetched, setProjectsFetched] = useState([])
@@ -16,16 +16,20 @@ function Projects({ urlBase }) {
         fetchProjects();
     }, []);
 
+    useEffect(() => {
+        if (projectsFetched[0]) {
+            dispatch({ type: 'SET_ALL_PROJECTS', payload: projectsFetched });
+        }
+    }, [projectsFetched]);
+
     async function fetchProjects() {
         try {
             const req = await fetch(`${urlBase}/api/projects`);
             const res = await req.json();
             setProjectsFetched(res);
-            console.log('projects fetched:', res); // Log the updated state directly
+            console.log('projects fetched:', res);
             // sending to reducer
-            if (projectsFetched.length > 0) {
-                dispatch({ type: 'SET_ALL_PROJECTS', payload: projectsFetched })
-            }
+            dispatch({ type: 'SET_ALL_PROJECTS', payload: projectsFetched })
 
         } catch (error) {
             console.error('Error fetching projects:', error);
