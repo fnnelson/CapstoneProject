@@ -1,16 +1,19 @@
-.project {
+.project,
+.task {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 20px;
     margin-bottom: 20px;
   }
   
-  .project h2 {
+  .project,
+  .task h2 {
     font-size: 20px;
     margin-bottom: 10px;
   }
   
-  .project p {
+  .project,
+  .task p {
     margin: 5px 0;
   }
   

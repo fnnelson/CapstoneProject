@@ -1,21 +1,22 @@
 const express = require('express')
 const { client } = require("../modules/database.js");
+const tasks = client.db().collection("tasks");
 const router = express.Router();
 
-// GET all tasks for a project
-router.get('/', (req, res) => {
-    console.log("tasks GET made it to server")
+// GET all tasks for a single project
+router.get('/:id', (req, res) => {
+    let projectId = Number(req.params.id);
+    console.log("tasks GET made it to server", projectId)
     // mongo query goes here
-
-    //using dummy json data to start
-    fetch('https://dummyjson.com/products/1')
-        .then(response => response.json())
-        .then((json) => {
-            res.status(200).send(json);
+    let data = tasks.find({ "project_id": projectId }).toArray();
+    data
+        .then((data) => {
+            res.status(200).send(data);
         })
         .catch((err) => {
-            res.status(501).send({ alert: "Error getting tasks" }, err);
+            res.status(501).send({ alert: "Error getting all projects" }, err);
         });
+
 })
 
 // POST new task

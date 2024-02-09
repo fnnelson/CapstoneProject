@@ -1,5 +1,7 @@
 const express = require('express')
 const { client } = require("../modules/database.js");
+const projects = client.db().collection("projects");
+const users = client.db().collection("users");
 const router = express.Router();
 
 // GET all projects
@@ -7,14 +9,14 @@ router.get('/', (req, res) => {
     console.log("projects GET made it to server")
     // mongo query goes here
 
-    //using dummy json data to start
-    fetch('https://dummyjson.com/products')
-        .then(response => response.json())
-        .then((json) => {
-            res.status(200).send(json.products);
+    console.log("reached getAllProjects")
+    let data = projects.find({}).limit(20).toArray();
+    data
+        .then((data) => {
+            res.status(200).send(data);
         })
         .catch((err) => {
-            res.status(501).send({ alert: "Error getting projects" }, err);
+            res.status(501).send({ alert: "Error getting all projects" }, err);
         });
 })
 
