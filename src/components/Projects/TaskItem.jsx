@@ -2,8 +2,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import '../App/App.css'
 
-function TaskItem({ urlBase, task, fetchTasks }) {
+function TaskItem({ task, fetchTasks }) {
     const dispatch = useDispatch();
+    const urlBase = 'http://localhost:3000'
 
     const [currentStatus, setCurrentStatus] = useState(task.status)
 
@@ -43,7 +44,6 @@ function TaskItem({ urlBase, task, fetchTasks }) {
             <h2>Task: {task.description}</h2>
             <p>Due Date: {task.due_date}</p>
             <p>Estimated Duration: {task.estimated_duration}</p>
-            <p>Project #: {task.project_id}</p>
             <p>Status: {task.status}</p>
             <br />
 

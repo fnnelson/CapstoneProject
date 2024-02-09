@@ -3,10 +3,12 @@ import { useEffect, useState } from 'react';
 import '../App/App.css'
 import TaskItem from './TaskItem';
 
-function OneProject({ urlBase }) {
+function OneProject() {
     const dispatch = useDispatch();
     const project = useSelector((store) => store.projects.oneProject);
     const tasks = useSelector((store) => store.tasks.allTasks)
+
+    const urlBase = 'http://localhost:3000'
 
     const [tasksFetched, setTasksFetched] = useState([])
 

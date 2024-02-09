@@ -4,10 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import '../App/App.css'
 // import OneProject from "./OneProject";
 
-function Projects({ urlBase }) {
+function Projects() {
     const navigateTo = useNavigate();
     const dispatch = useDispatch();
     const allProjects = useSelector((store) => store.projects.allProjects);
+
+    const urlBase = 'http://localhost:3000'
 
     const [projectNameInput, setProjectNameInput] = useState("");
     const [projectsFetched, setProjectsFetched] = useState([])
@@ -69,7 +71,7 @@ function Projects({ urlBase }) {
         // send this project's data to the oneProject reducer
         dispatch({ type: 'SET_ONE_PROJECT', payload: project })
         // then go to details page for OneProject component
-        navigateTo("/project")
+        navigateTo("/viewproject")
     };
 
     return (
@@ -84,7 +86,7 @@ function Projects({ urlBase }) {
                             onChange={(event) => setProjectNameInput(event.target.value)}
                         />
                         <button onClick={() => addNewProject()}>
-                            Add New Task
+                            Add New Project
                         </button>
                     </label>
                 </form>
@@ -93,7 +95,7 @@ function Projects({ urlBase }) {
             <h1>Your Projects</h1>
             <div className="projects">
                 {projectsFetched.map((project) => (
-                    <div key={project.id} className="project">
+                    <div key={project.project_id} className="project">
                         <h2>Project # {project.project_id}</h2>
                         <p>Team Size: {project.team_size}</p>
                         <p>Workload: {project.workload}</p>

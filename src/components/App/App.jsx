@@ -1,20 +1,36 @@
-import { Routes, Route } from 'react-router-dom';
-import Projects from '../Projects/Projects'
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { HashRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import Projects from '../Projects/Projects';
 import OneProject from '../Projects/OneProject';
-import './App.css'
+import LoginPage from '../Login/LoginPage';
+import './App.css';
 
 function App() {
-  const urlBase = 'http://localhost:3000'
-  
+  const dispatch = useDispatch();
+  const user = useSelector(store => store.user);
+
+  useEffect(() => {
+    dispatch({ type: 'FETCH_USER' });
+  }, []);
+
   return (
     <>
       <h1>Project Management App</h1>
-      <Routes>
-        <Route path="/" element={<Projects urlBase={urlBase} />} />
-        <Route path="/project" element={<OneProject urlBase={urlBase}/>} />
-      </Routes>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LoginOrRedirect user={user} />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/projects" element={user.user_id ? <Projects /> : <Navigate to="/login" />} />
+          <Route path="/viewproject" element={user.user_id ? <OneProject /> : <Navigate to="/login" />} />
+        </Routes>
+      </Router>
     </>
-  )
+  );
 }
 
-export default App
+function LoginOrRedirect({ user }) {
+  return user.user_id ? <Projects /> : <LoginPage />;
+}
+
+export default App;

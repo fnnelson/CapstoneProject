@@ -1,8 +1,9 @@
 const express = require("express");
 const cors = require("cors")
 const app = express();
-const projectsRouter = require('./routes/projects.router')
-const tasksRouter = require('./routes/tasks.router')
+const projectsRouter = require('./routes/projects.router');
+const tasksRouter = require('./routes/tasks.router');
+const userRouter = require('./routes/user.router');
 
 app.use(express.json()); //Parse JSON body
 app.use(cors());
@@ -11,6 +12,7 @@ app.use(cors());
 app.get("/", (req, res) => res.send("Server is running"));
 app.use("/api/projects", projectsRouter);
 app.use("/api/tasks", tasksRouter);
+app.use("/api/user", userRouter);
 
 /*==================== PORT ====================*/
 const port = 3000;

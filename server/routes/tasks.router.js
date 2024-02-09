@@ -16,7 +16,6 @@ router.get('/:id', (req, res) => {
         .catch((err) => {
             res.status(501).send({ alert: "Error getting all tasks" }, err);
         });
-
 })
 
 // POST new task
