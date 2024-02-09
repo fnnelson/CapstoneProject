@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import '../App/App.css'
 import { useNavigate } from 'react-router-dom';
 import OneProject from "./OneProject";
 
 function Projects({ urlBase }) {
     const navigateTo = useNavigate();
-    const allProjects = useSelector((store) => store.projects.allProjects);
+    const dispatch = useDispatch();
+    // const allProjects = useSelector((store) => store.projects.allProjects);
 
     const [projectNameInput, setProjectNameInput] = useState("");
     const [projectsFetched, setProjectsFetched] = useState([])
@@ -21,6 +22,11 @@ function Projects({ urlBase }) {
             const res = await req.json();
             setProjectsFetched(res);
             console.log('projects fetched:', res); // Log the updated state directly
+            // sending to reducer
+            if (projectsFetched.length > 0) {
+                dispatch({ type: 'SET_ALL_PROJECTS', payload: projectsFetched })
+            }
+
         } catch (error) {
             console.error('Error fetching projects:', error);
         }
