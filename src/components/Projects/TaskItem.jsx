@@ -43,7 +43,6 @@ function TaskItem({ urlBase, task, fetchTasks }) {
             <h2>Task: {task.description}</h2>
             <p>Due Date: {task.due_date}</p>
             <p>Estimated Duration: {task.estimated_duration}</p>
-            <p>Project #: {task.project_id}</p>
             <p>Status: {task.status}</p>
             <br />
 
