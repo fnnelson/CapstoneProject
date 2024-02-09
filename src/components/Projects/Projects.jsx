@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import '../App/App.css'
 import { useNavigate } from 'react-router-dom';
-import OneProject from "./OneProject";
+// import OneProject from "./OneProject";
 
 function Projects({ urlBase }) {
     const navigateTo = useNavigate();
+    const dispatch = useDispatch();
+    // const allProjects = useSelector((store) => store.projects.allProjects);
 
     const [projectNameInput, setProjectNameInput] = useState("");
     const [projectsFetched, setProjectsFetched] = useState([])
@@ -19,6 +22,11 @@ function Projects({ urlBase }) {
             const res = await req.json();
             setProjectsFetched(res);
             console.log('projects fetched:', res); // Log the updated state directly
+            // sending to reducer
+            if (projectsFetched.length > 0) {
+                dispatch({ type: 'SET_ALL_PROJECTS', payload: projectsFetched })
+            }
+
         } catch (error) {
             console.error('Error fetching projects:', error);
         }
@@ -54,6 +62,10 @@ function Projects({ urlBase }) {
 
     const handleViewDetailsClick = (project) => {
         console.log("project to send to reducer", project);
+        // send this project's data to the oneProject reducer
+        dispatch({ type: 'SET_ONE_PROJECT', payload: project })
+        // then go to details page for OneProject component
+        navigateTo("/project")
     };
 
     return (
@@ -84,6 +96,7 @@ function Projects({ urlBase }) {
                         <p>Description: {project.description}</p>
                         <p>Price: {project.price}</p>
                         <img style={{ height: '100px' }} src={project.thumbnail} alt="Thumbnail" />
+                        <br />
                         <button onClick={() => handleViewDetailsClick(project)}>View Details</button>
                     </div>
                 ))}
