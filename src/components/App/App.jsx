@@ -17,11 +17,12 @@ function App() {
 
   return (
     <>
+      <h1>MegaCorp Enterprises <i>Task Manager</i></h1>
       <Router>
         <Routes>
           <Route path="/" element={<LoginOrRedirect user={user} />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/projects" element={user.user_id ? <Projects /> : <Navigate to="/login" />} />
+          <Route path="/projects" element={user.user_id ? (user.role === "manager" ? <Projects /> : <Navigate to="/employeetasks" />) : <Navigate to="/login" />} />
           <Route path="/viewproject" element={user.user_id ? <OneProject /> : <Navigate to="/login" />} />
           <Route path="/employeetasks" element={user.user_id ? <EmployeeTasks /> : <Navigate to="/login" />} />
         </Routes>
@@ -31,7 +32,7 @@ function App() {
 }
 
 function LoginOrRedirect({ user }) {
-  return user.user_id ? <Projects /> : <LoginPage />;
+  return user.user_id ? (user.role === "manager" ? <Projects /> : <EmployeeTasks />) : <LoginPage />;
 }
 
 export default App;

@@ -51,13 +51,11 @@ function Projects() {
         navigateTo("/employeetasks")
     };
 
-
-
     return (
         <>
             <button onClick={() => handleViewEmployeeTasksClick()} >View your tasks</button>
             <AddProjectsForm />
-            <h1>Your Projects</h1>
+            <h1>Your Team's Projects</h1>
             <div className="projects">
                 {projectsFetched.map((project) => (
                     <div key={project.project_id} className="project">
