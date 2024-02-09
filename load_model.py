@@ -1,16 +1,24 @@
 # Python Script for Inference
 import sys
 import json
-import joblib
+import pickle
+import pandas as pd
+import math
 
 # Load the machine learning model
-model = joblib.load("iris_model.pkl")
+model = pickle.load(open("model.pkl", 'rb'))
 
 # Read input data from command-line arguments
 input_data = json.loads(sys.argv[1])
 
+# Convert input data to a pandas DataFrame
+input_df = pd.DataFrame([input_data])
+
+# Select relevant columns (adjust column names as needed)
+input_df = input_df[['team_size', 'budget', 'workload']]
+
 # Perform inference
-prediction = model.predict([input_data])
+prediction = model.predict(input_df)
 
 # Print prediction to stdout
-print(prediction[0])
+print(f"The estimated completion time is {math.ceil(prediction[0][0])} days.")
