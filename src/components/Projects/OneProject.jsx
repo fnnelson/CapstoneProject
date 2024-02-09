@@ -1,5 +1,12 @@
+import { useSelector, useDispatch } from 'react-redux';
+
 import '../App/App.css'
-function OneProject({ project }) {
+
+function OneProject() {
+
+    // const dispatch = useDispatch();
+    const project = useSelector((store) => store.projects.oneProject);
+
     return (
         <>
             <h1>One Project</h1>

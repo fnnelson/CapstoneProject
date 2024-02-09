@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import '../App/App.css'
 import { useNavigate } from 'react-router-dom';
-import OneProject from "./OneProject";
+// import OneProject from "./OneProject";
 
 function Projects({ urlBase }) {
     const navigateTo = useNavigate();
@@ -62,6 +62,8 @@ function Projects({ urlBase }) {
 
     const handleViewDetailsClick = (project) => {
         console.log("project to send to reducer", project);
+        // send this project's data to the oneProject reducer
+        dispatch({ type: 'SET_ONE_PROJECT', payload: project })
         // then go to details page for OneProject component
         navigateTo("/project")
     };
@@ -94,6 +96,7 @@ function Projects({ urlBase }) {
                         <p>Description: {project.description}</p>
                         <p>Price: {project.price}</p>
                         <img style={{ height: '100px' }} src={project.thumbnail} alt="Thumbnail" />
+                        <br />
                         <button onClick={() => handleViewDetailsClick(project)}>View Details</button>
                     </div>
                 ))}
