@@ -6,7 +6,7 @@ import TaskItem from './TaskItem';
 function OneProject() {
     const dispatch = useDispatch();
     const project = useSelector((store) => store.projects.oneProject);
-    const tasks = useSelector((store) => store.tasks.allTasks)
+    const tasks = useSelector((store) => store.tasks.singleProjectTasks)
 
     const urlBase = 'http://localhost:3000'
 
@@ -26,7 +26,7 @@ function OneProject() {
         try {
             console.log("project # is", project.project_id)
             let projectId = project.project_id;
-            const req = await fetch(`${urlBase}/api/tasks/${projectId}`);
+            const req = await fetch(`${urlBase}/api/tasks/project/${projectId}`);
             const res = await req.json();
             setTasksFetched(res);
             console.log('tasks fetched:', res);
