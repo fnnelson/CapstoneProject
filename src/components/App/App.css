@@ -1,24 +1,38 @@
 .project,
 .task {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .project,
-  .task h2 {
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-  
-  .project,
-  .task p {
-    margin: 5px 0;
-  }
-  
-  .project img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 10px;
-  }
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.project,
+.task h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.project,
+.task p {
+  margin: 5px 0;
+}
+
+.project img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 10px;
+}
+
+.tasks-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.incomplete-tasks,
+.complete-tasks {
+  width: 45%;
+}
+
+.complete-tasks .task {
+  background-color: green;
+}
