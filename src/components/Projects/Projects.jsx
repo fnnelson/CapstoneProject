@@ -59,12 +59,11 @@ function Projects() {
             <div className="projects">
                 {projectsFetched.map((project) => (
                     <div key={project.project_id} className="project">
-                        <h2>Project {project.project_name}</h2>
+                        <h2>{project.project_name} Project</h2>
                         <p>Team Size: {project.team_size}</p>
                         <p>Workload: {project.workload}</p>
                         <p>Budget: {project.budget}</p>
-                        <p>Completion Time: {project.completion_time}</p>
-                        <br />
+                        <p>Est Completion Time: {project.completion_time} {project.completion_time === 1 ? 'day' : 'days'}</p>
                         <button onClick={() => handleViewDetailsClick(project)}>View Details</button>
                     </div>
                 ))}

@@ -38,21 +38,32 @@ function OneProject() {
         }
     }
 
+    const incompleteTasks = tasks.filter(task => task.status === 'incomplete');
+    const completeTasks = tasks.filter(task => task.status === 'complete');
+
     return (
         <>
-            <h1>One Project</h1>
+            <h1>{project.project_name} Project</h1>
             <div>
-                <h2>Project {project.project_name}</h2>
                 <p>Team Size: {project.team_size}</p>
                 <p>Workload: {project.workload}</p>
                 <p>Budget: {project.budget}</p>
-                <p>Completion Time: {project.completion_time}</p>
+                <p>Est Completion Time: {project.completion_time} {project.completion_time === 1 ? 'day' : 'days'}</p>
             </div>
-            <h1>Tasks Associated to this project</h1>
-            <div className="tasks">
-                {tasksFetched.map((task) => (
-                    <TaskItem key={task.task_id} task={task} fetchTasks={fetchTasks} urlBase={urlBase} />
-                ))}
+            <h1>Project tasks</h1>
+            <div className="tasks-container">
+                <div className="incomplete-tasks">
+                    <h2>Incomplete</h2>
+                    {incompleteTasks.map((task) => (
+                        <TaskItem key={task.task_id} task={task} fetchTasks={fetchTasks} urlBase={urlBase} />
+                    ))}
+                </div>
+                <div className="complete-tasks">
+                    <h2>Complete</h2>
+                    {completeTasks.map((task) => (
+                        <TaskItem key={task.task_id} task={task} fetchTasks={fetchTasks} urlBase={urlBase} />
+                    ))}
+                </div>
             </div>
         </>
     )
