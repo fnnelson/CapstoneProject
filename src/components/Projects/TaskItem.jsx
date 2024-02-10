@@ -18,22 +18,45 @@ function TaskItem({ task, fetchTasks, fetchEmployeeTasks }) {
         setIsModalOpen(false);
     };
 
-    const handleUpdateTask = (updatedTask) => {
+    const handleUpdateTask = async (updatedTask) => {
 
-        console.log("Updated Task:", updatedTask);
-        
-        // Fetch updated tasks
-        // fetchEmployeeTasks();
+        try {
+            console.log("Updated Task:", updatedTask);
+            console.log("task to update", task.task_id)
+
+            const req = await fetch(`${urlBase}/api/tasks/taskdetails/${task.task_id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                // only want to send the 3 properties that can be changed
+                body: JSON.stringify({
+                    description: updatedTask.description,
+                    due_date: updatedTask.due_date,
+                    estimated_duration: updatedTask.estimated_duration
+                })
+            });
+            if (req.ok) {
+                console.log('Task successfully updated!');
+                // fetching updated tasks
+                fetchEmployeeTasks();
+            } else {
+                console.error('You failed at updating the status!');
+            }
+
+        } catch (error) {
+            console.error('Error updating task:', error);
+        }
     };
 
 
-    async function handleUpdateStatus() {
+    const handleUpdateStatus = async () => {
         event.preventDefault();
         try {
             console.log("status is now", currentStatus)
             console.log("task to update", task.task_id)
 
-            const req = await fetch(`${urlBase}/api/tasks/task/${task.task_id}`, {
+            const req = await fetch(`${urlBase}/api/tasks/taskstatus/${task.task_id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -70,6 +93,11 @@ function TaskItem({ task, fetchTasks, fetchEmployeeTasks }) {
                 <button>Update</button>
             </form>
             <button onClick={handleEditTask}>Edit Task</button>
+
+            {/* modal pops open (renders) when isModalOpen is true, passing 3 props: 
+            taskToEdit is the current task being passed to the modal
+            handleUpdateTask and handleCloseModal will run in this component
+            when the Update Task button is clicked in the EditTaskModal*/}
             {isModalOpen && (
                 <EditTaskModal
                     taskToEdit={task}

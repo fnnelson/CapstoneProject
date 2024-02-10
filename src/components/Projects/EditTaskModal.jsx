@@ -7,12 +7,16 @@ function EditTaskModal({ taskToEdit, onUpdateTask, onCloseModal }) {
 
     const handleUpdateTask = (event) => {
         event.preventDefault();
+        // onUpdateTask was passed from TaskItem as prop
+        // it's called to update task with edited details
+        // updated object incl all task properties with changes in the desc/duedate/estdur from local state
         onUpdateTask({
-            ...taskToEdit,
-            description: description,
+            ...taskToEdit, // spread operator to incl all properties of the original task
+            description: description, //updated properties
             due_date: dueDate,
             estimated_duration: estimatedDuration
         });
+        // calling function (sent from TaskItem) to close modal after task details are updated
         onCloseModal();
     };
 

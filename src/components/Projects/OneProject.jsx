@@ -55,13 +55,21 @@ function OneProject() {
                 <div className="incomplete-tasks">
                     <h2>Incomplete</h2>
                     {incompleteTasks.map((task) => (
-                        <TaskItem key={task.task_id} task={task} fetchTasks={fetchTasks} urlBase={urlBase} />
+                        <TaskItem
+                            key={task.task_id}
+                            task={task}
+                            fetchTasks={fetchTasks}
+                            urlBase={urlBase} />
                     ))}
                 </div>
                 <div className="complete-tasks">
                     <h2>Complete</h2>
                     {completeTasks.map((task) => (
-                        <TaskItem key={task.task_id} task={task} fetchTasks={fetchTasks} urlBase={urlBase} />
+                        <TaskItem
+                            key={task.task_id}
+                            task={task}
+                            fetchTasks={fetchTasks}
+                            urlBase={urlBase} />
                     ))}
                 </div>
             </div>

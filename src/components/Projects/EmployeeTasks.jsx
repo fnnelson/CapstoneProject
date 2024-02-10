@@ -44,13 +44,21 @@ function EmployeeTasks() {
                 <div className="incomplete-tasks">
                     <h2>Incomplete Tasks</h2>
                     {incompleteTasks.map((task) => (
-                        <TaskItem key={task.task_id} task={task} fetchEmployeeTasks={fetchEmployeeTasks} urlBase={urlBase} />
+                        <TaskItem
+                            key={task.task_id}
+                            task={task}
+                            fetchEmployeeTasks={fetchEmployeeTasks}
+                            urlBase={urlBase} />
                     ))}
                 </div>
                 <div className="complete-tasks">
                     <h2>Complete Tasks</h2>
                     {completeTasks.map((task) => (
-                        <TaskItem key={task.task_id} task={task} fetchEmployeeTasks={fetchEmployeeTasks} urlBase={urlBase} />
+                        <TaskItem
+                            key={task.task_id}
+                            task={task}
+                            fetchEmployeeTasks={fetchEmployeeTasks}
+                            urlBase={urlBase} />
                     ))}
                 </div>
             </div>
