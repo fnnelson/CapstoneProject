@@ -27,6 +27,7 @@ function OneProject() {
         try {
             console.log("project # is", project.project_id)
             let projectId = project.project_id;
+            // getting all tasks related to projectId
             const req = await fetch(`${urlBase}/api/tasks/project/${projectId}`);
             const res = await req.json();
             setTasksFetched(res);
@@ -39,6 +40,7 @@ function OneProject() {
         }
     }
 
+    // splitting tasks based on completed status (so they can be rendered on left or right)
     const incompleteTasks = tasks.filter(task => task.status === 'incomplete');
     const completeTasks = tasks.filter(task => task.status === 'complete');
 
@@ -51,7 +53,7 @@ function OneProject() {
                 <p>Budget: {project.budget}</p>
                 <p>Est Completion Time: {project.completion_time} {project.completion_time === 1 ? 'day' : 'days'}</p>
             </div>
-            <h1>Project tasks</h1>
+            <h1>Project Tasks</h1>
             <AddProjectsForm />
             <div className="tasks-container">
                 <div className="incomplete-tasks">

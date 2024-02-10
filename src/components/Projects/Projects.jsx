@@ -14,13 +14,16 @@ function Projects() {
     const [projectsFetched, setProjectsFetched] = useState([])
 
     useEffect(() => {
+        // fetch all projects upon page load
         fetchProjects();
     }, []);
 
     useEffect(() => {
+        // once the projects array exists from the fetch, will assign all projects to projects reducer
         if (projectsFetched[0]) {
             dispatch({ type: 'SET_ALL_PROJECTS', payload: projectsFetched });
         }
+        // this useEffect is dependent on change of projectsFetched value (meaning the data has been fetched or changed)
     }, [projectsFetched]);
 
     async function fetchProjects() {

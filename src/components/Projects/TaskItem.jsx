@@ -131,6 +131,7 @@ function TaskItem({ task, fetchTasks, fetchAppropriateTasks }) {
                 <button>Update</button>
             </form>
 
+            {/* only want managers to have access to edit and delete buttons */}
             {user.role === 'manager' && (
                 <>
                     <button onClick={handleEditTask}>Edit Task</button>
