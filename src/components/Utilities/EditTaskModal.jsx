@@ -38,6 +38,7 @@ function EditTaskModal({ taskToEdit, onUpdateTask, onCloseModal }) {
                         <input type="number" id="estimatedDuration" value={estimatedDuration} onChange={(e) => setEstimatedDuration(e.target.value)} />
                     </div>
                     <button type="submit">Update Task</button>
+                    <button onClick={onCloseModal}>Cancel</button>
                 </form>
             </div>
         </div>

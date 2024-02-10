@@ -1,23 +1,38 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import EditTaskModal from './EditTaskModal';
+import EditTaskModal from '../Utilities/EditTaskModal';
 import '../App/App.css'
+import DeleteTaskModal from '../Utilities/DeleteTaskModal';
 
-function TaskItem({ task, fetchTasks, fetchEmployeeTasks }) {
+function TaskItem({ task, fetchTasks, fetchAppropriateTasks }) {
     const dispatch = useDispatch();
     const urlBase = 'http://localhost:3000'
 
+    const user = useSelector((store) => store.user)
+
     const [currentStatus, setCurrentStatus] = useState(task.status)
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
+    // for edits
     const handleEditTask = () => {
         setIsModalOpen(true);
     };
-
     const handleCloseModal = () => {
         setIsModalOpen(false);
     };
+    // for edits (end)
 
+    // for deletes
+    const handleStartToDeleteTask = () => {
+        setIsDeleteModalOpen(true);
+    };
+    const handleCloseDeleteModal = () => {
+        setIsDeleteModalOpen(false);
+    };
+    // for deletes (end)
+
+    // updating task details
     const handleUpdateTask = async (updatedTask) => {
 
         try {
@@ -39,7 +54,7 @@ function TaskItem({ task, fetchTasks, fetchEmployeeTasks }) {
             if (req.ok) {
                 console.log('Task successfully updated!');
                 // fetching updated tasks
-                fetchEmployeeTasks();
+                fetchAppropriateTasks();
             } else {
                 console.error('You failed at updating the status!');
             }
@@ -48,8 +63,30 @@ function TaskItem({ task, fetchTasks, fetchEmployeeTasks }) {
             console.error('Error updating task:', error);
         }
     };
+    // updating task details (end)
 
+    // deleting task
+    const handleDeleteTask = async (taskDeleting) => {
+        event.preventDefault();
+        try {
+            console.log("task to delete:", taskDeleting.task_id)
+            const req = await fetch(`${urlBase}/api/tasks/delete/${task.task_id}`, {
+                method: 'DELETE'
+            });
+            if (req.ok) {
+                console.log('Task successfully deleted!');
+                // fetching updated tasks
+                fetchAppropriateTasks();
+            } else {
+                console.error('You failed at deleting the task!');
+            }
+        } catch (error) {
+            console.error('Error deleting task:', error);
+        }
+    }
+    // deleting task (end)
 
+    // updating task status
     const handleUpdateStatus = async () => {
         event.preventDefault();
         try {
@@ -66,7 +103,7 @@ function TaskItem({ task, fetchTasks, fetchEmployeeTasks }) {
             if (req.ok) {
                 console.log('Task successfully updated!');
                 // fetching updated tasks
-                fetchEmployeeTasks();
+                fetchAppropriateTasks();
             } else {
                 console.error('You failed at updating the status!');
             }
@@ -75,6 +112,7 @@ function TaskItem({ task, fetchTasks, fetchEmployeeTasks }) {
             console.error('Error updating task:', error);
         }
     }
+    // updating task status (end)
 
     return (
         <div className="task">
@@ -92,18 +130,35 @@ function TaskItem({ task, fetchTasks, fetchEmployeeTasks }) {
                 </select>
                 <button>Update</button>
             </form>
-            <button onClick={handleEditTask}>Edit Task</button>
 
-            {/* modal pops open (renders) when isModalOpen is true, passing 3 props: 
+            {user.role === 'manager' && (
+                <>
+                    <button onClick={handleEditTask}>Edit Task</button>
+                    {/* modal pops open (renders) when isModalOpen is true, passing 3 props: 
             taskToEdit is the current task being passed to the modal
             handleUpdateTask and handleCloseModal will run in this component
             when the Update Task button is clicked in the EditTaskModal*/}
-            {isModalOpen && (
-                <EditTaskModal
-                    taskToEdit={task}
-                    onUpdateTask={handleUpdateTask}
-                    onCloseModal={handleCloseModal}
-                />
+                    {isModalOpen && (
+                        <EditTaskModal
+                            taskToEdit={task}
+                            onUpdateTask={handleUpdateTask}
+                            onCloseModal={handleCloseModal}
+                        />
+                    )}
+                    <br />
+                    <button onClick={handleStartToDeleteTask} className='delete-button'>Delete Task</button>
+                    {/* modal pops open (renders) when isDeleteModalOpen is true, passing 3 props: 
+            taskToDelete is the current task being passed to the modal
+            handleDeleteTask and handleCloseDeleteModal will run in this component
+            when the Delete Task button is clicked in the EditTaskModal*/}
+                    {isDeleteModalOpen && (
+                        <DeleteTaskModal
+                            taskToDelete={task}
+                            onDeleteTask={handleDeleteTask}
+                            onCloseDeleteModal={handleCloseDeleteModal}
+                        />
+                    )}
+                </>
             )}
         </div>
     )

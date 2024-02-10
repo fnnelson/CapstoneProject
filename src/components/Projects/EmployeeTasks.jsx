@@ -38,26 +38,26 @@ function EmployeeTasks() {
 
     return (
         <div>
-            <h1>Hello, valued employee # {user.user_id}!</h1>
-            <h1>Your Tasks</h1>
+            <h1>Welcome back, Valued Employee # {user.user_id}!</h1>
+            <h1>Your Assigned Tasks</h1>
             <div className="tasks-container">
                 <div className="incomplete-tasks">
-                    <h2>Incomplete Tasks</h2>
+                    <h2>Incomplete ({incompleteTasks.length})</h2>
                     {incompleteTasks.map((task) => (
                         <TaskItem
                             key={task.task_id}
                             task={task}
-                            fetchEmployeeTasks={fetchEmployeeTasks}
+                            fetchAppropriateTasks={fetchEmployeeTasks}
                             urlBase={urlBase} />
                     ))}
                 </div>
                 <div className="complete-tasks">
-                    <h2>Complete Tasks</h2>
+                    <h2>Complete ({completeTasks.length})</h2>
                     {completeTasks.map((task) => (
                         <TaskItem
                             key={task.task_id}
                             task={task}
-                            fetchEmployeeTasks={fetchEmployeeTasks}
+                            fetchAppropriateTasks={fetchEmployeeTasks}
                             urlBase={urlBase} />
                     ))}
                 </div>
