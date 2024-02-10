@@ -8,6 +8,8 @@ function TaskItem({ task, fetchTasks, fetchAppropriateTasks }) {
     const dispatch = useDispatch();
     const urlBase = 'http://localhost:3000'
 
+    const user = useSelector((store) => store.user)
+
     const [currentStatus, setCurrentStatus] = useState(task.status)
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -128,28 +130,35 @@ function TaskItem({ task, fetchTasks, fetchAppropriateTasks }) {
                 </select>
                 <button>Update</button>
             </form>
-            <button onClick={handleEditTask}>Edit Task</button>
 
-            {/* modal pops open (renders) when isModalOpen is true, passing 3 props: 
+            {user.role === 'manager' && (
+                <>
+                    <button onClick={handleEditTask}>Edit Task</button>
+                    {/* modal pops open (renders) when isModalOpen is true, passing 3 props: 
             taskToEdit is the current task being passed to the modal
             handleUpdateTask and handleCloseModal will run in this component
             when the Update Task button is clicked in the EditTaskModal*/}
-            {isModalOpen && (
-                <EditTaskModal
-                    taskToEdit={task}
-                    onUpdateTask={handleUpdateTask}
-                    onCloseModal={handleCloseModal}
-                />
-            )}
-
-            <button onClick={handleStartToDeleteTask}>Delete Task</button>
-
-            {isDeleteModalOpen && (
-                <DeleteTaskModal
-                    taskToDelete={task}
-                    onDeleteTask={handleDeleteTask}
-                    onCloseDeleteModal={handleCloseDeleteModal}
-                />
+                    {isModalOpen && (
+                        <EditTaskModal
+                            taskToEdit={task}
+                            onUpdateTask={handleUpdateTask}
+                            onCloseModal={handleCloseModal}
+                        />
+                    )}
+                    <br />
+                    <button onClick={handleStartToDeleteTask} className='delete-button'>Delete Task</button>
+                    {/* modal pops open (renders) when isDeleteModalOpen is true, passing 3 props: 
+            taskToDelete is the current task being passed to the modal
+            handleDeleteTask and handleCloseDeleteModal will run in this component
+            when the Delete Task button is clicked in the EditTaskModal*/}
+                    {isDeleteModalOpen && (
+                        <DeleteTaskModal
+                            taskToDelete={task}
+                            onDeleteTask={handleDeleteTask}
+                            onCloseDeleteModal={handleCloseDeleteModal}
+                        />
+                    )}
+                </>
             )}
         </div>
     )

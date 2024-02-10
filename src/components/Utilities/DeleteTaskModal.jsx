@@ -14,7 +14,7 @@ function DeleteTaskModal({ taskToDelete, onDeleteTask, onCloseDeleteModal }) {
             <div className="modal-content">
                 <h2>Delete Task</h2>
                 <p>Are you sure you want to delete the task: {taskToDelete.description}?</p>
-                <button onClick={handleDeleteTask}>Delete</button>
+                <button onClick={handleDeleteTask} className='delete-button'>Delete</button>
                 <button onClick={onCloseDeleteModal}>Cancel</button>
             </div>
         </div>

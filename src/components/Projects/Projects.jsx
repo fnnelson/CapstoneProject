@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from 'react-router-dom';
 import '../App/App.css'
-import AddProjectsForm from "../Utilities/AddProjectForm";
 
 function Projects() {
     const navigateTo = useNavigate();
@@ -54,7 +53,6 @@ function Projects() {
     return (
         <>
             <button onClick={() => handleViewEmployeeTasksClick()} >View your tasks</button>
-            <AddProjectsForm />
             <h1>Your Team's Projects</h1>
             <div className="projects">
                 {projectsFetched.map((project) => (

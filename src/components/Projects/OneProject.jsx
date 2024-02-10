@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import '../App/App.css'
 import TaskItem from './TaskItem';
+import AddProjectsForm from '../Utilities/AddTasksForm';
 
 function OneProject() {
     const dispatch = useDispatch();
@@ -51,9 +52,10 @@ function OneProject() {
                 <p>Est Completion Time: {project.completion_time} {project.completion_time === 1 ? 'day' : 'days'}</p>
             </div>
             <h1>Project tasks</h1>
+            <AddProjectsForm />
             <div className="tasks-container">
                 <div className="incomplete-tasks">
-                    <h2>Incomplete</h2>
+                    <h2>Incomplete ({incompleteTasks.length})</h2>
                     {incompleteTasks.map((task) => (
                         <TaskItem
                             key={task.task_id}
@@ -63,7 +65,7 @@ function OneProject() {
                     ))}
                 </div>
                 <div className="complete-tasks">
-                    <h2>Complete</h2>
+                    <h2>Complete ({completeTasks.length})</h2>
                     {completeTasks.map((task) => (
                         <TaskItem
                             key={task.task_id}
