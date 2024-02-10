@@ -19,7 +19,7 @@ function TaskItem({ task, fetchTasks, fetchEmployeeTasks }) {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({status: currentStatus})
+                body: JSON.stringify({ status: currentStatus })
             });
             if (req.ok) {
                 console.log('Task successfully updated!');
@@ -38,6 +38,7 @@ function TaskItem({ task, fetchTasks, fetchEmployeeTasks }) {
 
         <div className="task">
             <h2>Task: {task.description}</h2>
+            <p>Task #: {task.task_id}</p>
             <p>Due Date: {task.due_date}</p>
             <p>Estimated Duration: {task.estimated_duration}</p>
             <p>Status: {task.status}</p>
