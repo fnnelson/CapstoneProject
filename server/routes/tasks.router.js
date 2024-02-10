@@ -32,31 +32,34 @@ router.get('/employee/:id', (req, res) => {
         });
 })
 
-// POST new task
-router.post('/', (req, res) => {
-    console.log("task POST made it to server", req.body);
-    // mongo query goes here
-    const newProject = req.body;
-    res.status(201).send(newProject);
-})
+// // POST new task
+// router.post('/', (req, res) => {
+//     console.log("task POST made it to server", req.body);
+//     // mongo query goes here
+//     const newProject = req.body;
+//     res.status(201).send(newProject);
+// })
 
 // EDIT (put) task
 router.put('/task/:id', (req, res) => {
     let taskId = Number(req.params.id);
-    let newStatus = req.body;
+    let newStatus = req.body.status;
     console.log("task EDIT made it to server", taskId);
-    console.log("data to update", req.body)
+    console.log("data to update", newStatus)
     // mongo query goes here
     // update query here
-    // let data = tasks.find({ "project_id": taskId }).toArray();
-    // data
-    //     .then((data) => {
-    //         res.status(202).send(data);
-    //     })
-    //     .catch((err) => {
-    //         res.status(501).send({ alert: "Error updating task" }, err);
-    //     });
-})
+    let data = tasks.updateOne(
+        { "task_id": taskId },
+        { $set: { "status": newStatus } }
+    );
+    data
+        .then(() => {
+            res.status(200).send({ message: "task updated successfully" });
+        })
+        .catch((err) => {
+            res.status(501).send({ alert: "Error updating task" }, err);
+        })
+});
 
 // DELETE project
 router.delete('/:id', (req, res) => {
