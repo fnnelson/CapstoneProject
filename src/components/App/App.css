@@ -32,3 +32,7 @@
 .complete-tasks {
   width: 45%;
 }
+
+.complete-tasks .task {
+  background-color: green;
+}

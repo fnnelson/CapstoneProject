@@ -40,8 +40,7 @@ function TaskItem({ task, fetchTasks, fetchEmployeeTasks }) {
             <h2>Task: {task.description}</h2>
             <p>Task #: {task.task_id}</p>
             <p>Due Date: {task.due_date}</p>
-            <p>Estimated Duration: {task.estimated_duration}</p>
-            <p>Status: {task.status}</p>
+            <p>Estimated Duration: {task.estimated_duration} hours</p>
             <br />
 
 
