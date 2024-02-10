@@ -1,24 +1,48 @@
 const express = require('express')
 const { client } = require("../modules/database.js");
-const projects = client.db().collection("projects");
+const tasks = client.db().collection("tasks");
 const users = client.db().collection("users");
+// const projects = client.db().collection("projects");
 const router = express.Router();
 
 // GET all projects
-router.get('/', (req, res) => {
-    console.log("projects GET made it to server")
+router.get('/:id', (req, res) => {
+    let userId = Number(req.params.id);
+    console.log("projects GET made it to server", userId)
     // mongo query goes here
 
-    console.log("reached getAllProjects")
-    let data = projects.find({}).limit(20).toArray();
+    let data = tasks
+        .aggregate([
+            {
+                $match: { user_id: userId },
+            },
+            {
+                $lookup: {
+                    from: "projects",
+                    localField: "project_id",
+                    foreignField: "project_id",
+                    as: "project_matches",
+                },
+            },
+            {
+                $unwind: "$project_matches",
+            },
+            {
+                $replaceRoot: {
+                    newRoot: "$project_matches",
+                },
+            },
+        ])
+        .toArray();
     data
         .then((data) => {
             res.status(200).send(data);
         })
         .catch((err) => {
-            res.status(501).send({ alert: "Error getting all projects" }, err);
+            res.status(501).send({ alert: `Error getting characters of film with id ${userId}` }, err);
         });
-})
+});
+
 
 // POST new project
 router.post('/', (req, res) => {

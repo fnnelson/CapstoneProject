@@ -4,9 +4,9 @@ const tasks = client.db().collection("tasks");
 const router = express.Router();
 
 // GET all tasks for a single project
-router.get('/:id', (req, res) => {
+router.get('/project/:id', (req, res) => {
     let projectId = Number(req.params.id);
-    console.log("tasks GET made it to server", projectId)
+    console.log("project tasks GET made it to server, project id:", projectId)
     // mongo query goes here
     let data = tasks.find({ "project_id": projectId }).toArray();
     data
@@ -16,7 +16,20 @@ router.get('/:id', (req, res) => {
         .catch((err) => {
             res.status(501).send({ alert: "Error getting all tasks" }, err);
         });
-
+})
+// GET all tasks for a single employee
+router.get('/employee/:id', (req, res) => {
+    let userId = Number(req.params.id);
+    console.log("employee tasks GET made it to server, user ID:", userId)
+    // mongo query goes here
+    let data = tasks.find({ "user_id": userId }).toArray();
+    data
+        .then((data) => {
+            res.status(200).send(data);
+        })
+        .catch((err) => {
+            res.status(501).send({ alert: "Error getting all tasks" }, err);
+        });
 })
 
 // POST new task
