@@ -91,9 +91,21 @@ router.put('/taskdetails/:id', (req, res) => {
 });
 
 // DELETE task
-router.delete('/:id', (req, res) => {
-    console.log("task DELETE made it to server")
+router.delete('/delete/:id', (req, res) => {
+    let taskId = Number(req.params.id);
+    console.log("task DELETE made it to server", taskId)
     // mongo query goes here
+
+    let data = tasks.deleteOne(
+        { "task_id": taskId }
+    );
+    data
+        .then(() => {
+            res.status(200).send({ message: "task deleted successfully" });
+        })
+        .catch((err) => {
+            res.status(500).send({ alert: "Error deleting task" }, err);
+        })
 })
 
 module.exports = router;

@@ -47,7 +47,7 @@ function EmployeeTasks() {
                         <TaskItem
                             key={task.task_id}
                             task={task}
-                            fetchEmployeeTasks={fetchEmployeeTasks}
+                            fetchAppropriateTasks={fetchEmployeeTasks}
                             urlBase={urlBase} />
                     ))}
                 </div>
@@ -57,7 +57,7 @@ function EmployeeTasks() {
                         <TaskItem
                             key={task.task_id}
                             task={task}
-                            fetchEmployeeTasks={fetchEmployeeTasks}
+                            fetchAppropriateTasks={fetchEmployeeTasks}
                             urlBase={urlBase} />
                     ))}
                 </div>

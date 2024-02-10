@@ -4,7 +4,7 @@ import EditTaskModal from '../Utilities/EditTaskModal';
 import '../App/App.css'
 import DeleteTaskModal from '../Utilities/DeleteTaskModal';
 
-function TaskItem({ task, fetchTasks, fetchEmployeeTasks }) {
+function TaskItem({ task, fetchTasks, fetchAppropriateTasks }) {
     const dispatch = useDispatch();
     const urlBase = 'http://localhost:3000'
 
@@ -52,7 +52,7 @@ function TaskItem({ task, fetchTasks, fetchEmployeeTasks }) {
             if (req.ok) {
                 console.log('Task successfully updated!');
                 // fetching updated tasks
-                fetchEmployeeTasks();
+                fetchAppropriateTasks();
             } else {
                 console.error('You failed at updating the status!');
             }
@@ -74,7 +74,7 @@ function TaskItem({ task, fetchTasks, fetchEmployeeTasks }) {
             if (req.ok) {
                 console.log('Task successfully deleted!');
                 // fetching updated tasks
-                fetchEmployeeTasks();
+                fetchAppropriateTasks();
             } else {
                 console.error('You failed at deleting the task!');
             }
@@ -101,7 +101,7 @@ function TaskItem({ task, fetchTasks, fetchEmployeeTasks }) {
             if (req.ok) {
                 console.log('Task successfully updated!');
                 // fetching updated tasks
-                fetchEmployeeTasks();
+                fetchAppropriateTasks();
             } else {
                 console.error('You failed at updating the status!');
             }

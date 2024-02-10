@@ -58,7 +58,7 @@ function OneProject() {
                         <TaskItem
                             key={task.task_id}
                             task={task}
-                            fetchTasks={fetchTasks}
+                            fetchAppropriateTasks={fetchTasks}
                             urlBase={urlBase} />
                     ))}
                 </div>
@@ -68,7 +68,7 @@ function OneProject() {
                         <TaskItem
                             key={task.task_id}
                             task={task}
-                            fetchTasks={fetchTasks}
+                            fetchAppropriateTasks={fetchTasks}
                             urlBase={urlBase} />
                     ))}
                 </div>
