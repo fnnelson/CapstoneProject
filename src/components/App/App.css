@@ -17,15 +17,23 @@
   margin: 5px 0;
 }
 
-.project img {
-  max-width: 100%;
-  height: auto;
-  margin-top: 10px;
-}
-
 .tasks-container {
   display: flex;
   justify-content: space-between;
+}
+
+.projects {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.project {
+  width: calc(25% - 20px);
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
 }
 
 .incomplete-tasks,
