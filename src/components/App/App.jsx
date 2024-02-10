@@ -6,7 +6,6 @@ import OneProject from '../Projects/OneProject';
 import LoginPage from '../Login/LoginPage';
 import './App.css';
 import EmployeeTasks from '../Projects/EmployeeTasks';
-
 function App() {
   const dispatch = useDispatch();
   const user = useSelector(store => store.user);

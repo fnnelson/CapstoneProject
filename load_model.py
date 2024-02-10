@@ -22,3 +22,4 @@ prediction = model.predict(input_df)
 
 # Print prediction to stdout
 print(f"The estimated completion time is {math.ceil(prediction[0][0])} days.")
+

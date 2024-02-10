@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from 'react-router-dom';
 import '../App/App.css'
 import AddProjectsForm from "./AddProjectForm";
+import ProjectForm from "./ProjectForm";
 
 function Projects() {
     const navigateTo = useNavigate();
@@ -52,25 +53,30 @@ function Projects() {
     };
 
     return (
-        <>
-            <button onClick={() => handleViewEmployeeTasksClick()} >View your tasks</button>
-            <AddProjectsForm />
-            <h1>Your Team's Projects</h1>
-            <div className="projects">
-                {projectsFetched.map((project) => (
-                    <div key={project.project_id} className="project">
-                        <h2>Project {project.project_name}</h2>
-                        <p>Team Size: {project.team_size}</p>
-                        <p>Workload: {project.workload}</p>
-                        <p>Budget: {project.budget}</p>
-                        <p>Completion Time: {project.completion_time}</p>
-                        <br />
-                        <button onClick={() => handleViewDetailsClick(project)}>View Details</button>
-                    </div>
-                ))}
+      <>
+        <button onClick={() => handleViewEmployeeTasksClick()}>
+          View your tasks
+        </button>
+        <AddProjectsForm />
+        <ProjectForm />
+        <h1>Your Team's Projects</h1>
+        <div className="projects">
+          {projectsFetched.map((project) => (
+            <div key={project.project_id} className="project">
+              <h2>Project {project.project_name}</h2>
+              <p>Team Size: {project.team_size}</p>
+              <p>Workload: {project.workload}</p>
+              <p>Budget: {project.budget}</p>
+              <p>Completion Time: {project.completion_time}</p>
+              <br />
+              <button onClick={() => handleViewDetailsClick(project)}>
+                View Details
+              </button>
             </div>
-        </>
-    )
+          ))}
+        </div>
+      </>
+    );
 }
 
 export default Projects;
