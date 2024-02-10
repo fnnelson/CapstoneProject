@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import '../App/App.css'
 
-function TaskItem({ task, fetchTasks }) {
+function TaskItem({ task, fetchTasks, fetchEmployeeTasks }) {
     const dispatch = useDispatch();
     const urlBase = 'http://localhost:3000'
 
@@ -14,21 +14,17 @@ function TaskItem({ task, fetchTasks }) {
             console.log("status is now", currentStatus)
             console.log("task to update", task.task_id)
 
-            //here having an issue with the json body being sent over - 
-            //will need to look at that plus how to show the 
-            //dropdown options as the current status on default
-
             const req = await fetch(`${urlBase}/api/tasks/task/${task.task_id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(currentStatus)
+                body: JSON.stringify({status: currentStatus})
             });
-            if (response.ok) {
+            if (req.ok) {
                 console.log('Task successfully updated!');
                 // fetching updated tasks
-                // fetchTasks();
+                fetchEmployeeTasks();
             } else {
                 console.error('You failed at updating the status!');
             }
@@ -48,14 +44,14 @@ function TaskItem({ task, fetchTasks }) {
             <br />
 
 
-            {/* <form onSubmit={updateStatus}>
+            <form onSubmit={updateStatus}>
                 <label htmlFor="status">Update Status:</label>
-                <select id="status" name="status">
-                    <option value="Incomplete">Incomplete</option>
-                    <option value="Complete">Complete</option>
+                <select id="status" name="status" value={currentStatus} onChange={(e) => setCurrentStatus(e.target.value)}>
+                    <option value="incomplete">Incomplete</option>
+                    <option value="complete">Complete</option>
                 </select>
                 <button>Update</button>
-            </form> */}
+            </form>
 
 
         </div>
