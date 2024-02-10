@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from 'react-router-dom';
 import '../App/App.css'
-import AddProjectsForm from "./AddProjectForm";
+import AddProjectsForm from "../Utilities/AddProjectForm";
 
 function Projects() {
     const navigateTo = useNavigate();

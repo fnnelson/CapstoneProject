@@ -1,7 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import EditTaskModal from './EditTaskModal';
+import EditTaskModal from '../Utilities/EditTaskModal';
 import '../App/App.css'
+import DeleteTaskModal from '../Utilities/DeleteTaskModal';
 
 function TaskItem({ task, fetchTasks, fetchEmployeeTasks }) {
     const dispatch = useDispatch();
@@ -9,15 +10,27 @@ function TaskItem({ task, fetchTasks, fetchEmployeeTasks }) {
 
     const [currentStatus, setCurrentStatus] = useState(task.status)
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
+    // for edits
     const handleEditTask = () => {
         setIsModalOpen(true);
     };
-
     const handleCloseModal = () => {
         setIsModalOpen(false);
     };
+    // for edits (end)
 
+    // for deletes
+    const handleStartToDeleteTask = () => {
+        setIsDeleteModalOpen(true);
+    };
+    const handleCloseDeleteModal = () => {
+        setIsDeleteModalOpen(false);
+    };
+    // for deletes (end)
+
+    // updating task details
     const handleUpdateTask = async (updatedTask) => {
 
         try {
@@ -48,8 +61,30 @@ function TaskItem({ task, fetchTasks, fetchEmployeeTasks }) {
             console.error('Error updating task:', error);
         }
     };
+    // updating task details (end)
 
+    // deleting task
+    const handleDeleteTask = async (taskDeleting) => {
+        event.preventDefault();
+        try {
+            console.log("task to delete:", taskDeleting.task_id)
+            const req = await fetch(`${urlBase}/api/tasks/delete/${task.task_id}`, {
+                method: 'DELETE'
+            });
+            if (req.ok) {
+                console.log('Task successfully deleted!');
+                // fetching updated tasks
+                fetchEmployeeTasks();
+            } else {
+                console.error('You failed at deleting the task!');
+            }
+        } catch (error) {
+            console.error('Error deleting task:', error);
+        }
+    }
+    // deleting task (end)
 
+    // updating task status
     const handleUpdateStatus = async () => {
         event.preventDefault();
         try {
@@ -75,6 +110,7 @@ function TaskItem({ task, fetchTasks, fetchEmployeeTasks }) {
             console.error('Error updating task:', error);
         }
     }
+    // updating task status (end)
 
     return (
         <div className="task">
@@ -103,6 +139,16 @@ function TaskItem({ task, fetchTasks, fetchEmployeeTasks }) {
                     taskToEdit={task}
                     onUpdateTask={handleUpdateTask}
                     onCloseModal={handleCloseModal}
+                />
+            )}
+
+            <button onClick={handleStartToDeleteTask}>Delete Task</button>
+
+            {isDeleteModalOpen && (
+                <DeleteTaskModal
+                    taskToDelete={task}
+                    onDeleteTask={handleDeleteTask}
+                    onCloseDeleteModal={handleCloseDeleteModal}
                 />
             )}
         </div>
