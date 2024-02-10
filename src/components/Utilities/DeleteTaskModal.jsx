@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 function DeleteTaskModal({ taskToDelete, onDeleteTask, onCloseDeleteModal }) {
 
     const handleDeleteTask = () => {
