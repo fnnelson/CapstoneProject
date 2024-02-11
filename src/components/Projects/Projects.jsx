@@ -56,6 +56,7 @@ function Projects() {
 
     return (
         <>
+            <ProjectForm />        
             <button onClick={() => handleViewEmployeeTasksClick()} >View your tasks</button>
             <h1>Your Team's Projects</h1>
             <div className="projects">

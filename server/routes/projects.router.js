@@ -65,25 +65,35 @@ router.post("/predict", (req, res) => {
   const input_data = req.body;
   console.log("input_data", input_data);
   // Run Python script for inference
-  PythonShell.run(
-    "load_model.py",
-    { args: [JSON.stringify({ team_size: 3, budget: 2, workload: 3 })] },
-    (err, result) => {
-      if (err) {
-        console.error("Error running Python script:", err);
-        res.status(500).send("Error performing inference");
-      } else {
-        try {
-          console.log("Prediction:", result);
-          const prediction = JSON.parse(result);
-          res.status(200).send({ prediction: prediction });
-        } catch (jsonError) {
-          console.error("Error parsing JSON from Python script:", jsonError);
-          res.status(500).send("Error parsing prediction result");
-        }
-      }
-    }
-  );
+  // PythonShell.run(
+  //   "load_model.py",
+  //   { args: [JSON.stringify({ team_size: 3, budget: 2, workload: 3 })] },
+  //   (err, result) => {
+  //     if (err) {
+  //       console.error("Error running Python script:", err);
+  //       res.status(500).send("Error performing inference");
+  //     } else {
+  //       try {
+  //         console.log("Prediction:", result);
+  //         const prediction = JSON.parse(result);
+  //         res.status(200).send({ prediction: prediction });
+  //       } catch (jsonError) {
+  //         console.error("Error parsing JSON from Python script:", jsonError);
+  //         res.status(500).send("Error parsing prediction result");
+  //       }
+  //     }
+  //   }
+  // );
+  PythonShell.run("load_model.py", {
+    args: [JSON.stringify({ team_size: 3, budget: 2, workload: 3 })],
+  })
+    .then((result) => {
+      console.log("successful!");
+      console.log("Prediction:", result);
+      const prediction = JSON.parse(result);
+      res.status(200).send({ prediction: prediction });
+    })
+    .catch((err) => console.log(err));
 });
 
 // DELETE project
