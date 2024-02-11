@@ -78,7 +78,7 @@ const ProjectForm = () => {
         <br />
         <button type="submit">Predict Completion Time</button>
       </form>
-      {prediction && <p>Predicted Completion Time: {prediction}</p>}
+      {prediction && <p>Predicted Completion Time: {prediction} days</p>}
     </div>
   );
 };

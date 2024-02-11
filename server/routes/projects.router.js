@@ -85,7 +85,7 @@ router.post("/predict", (req, res) => {
   //   }
   // );
   PythonShell.run("load_model.py", {
-    args: [JSON.stringify({ team_size: 3, budget: 2, workload: 3 })],
+    args: [JSON.stringify(input_data)],
   })
     .then((result) => {
       console.log("successful!");
