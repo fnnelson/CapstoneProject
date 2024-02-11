@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from 'react-router-dom';
 import '../App/App.css'
-import AddProjectsForm from "./AddProjectForm";
 import ProjectForm from "./ProjectForm";
 
 function Projects() {
@@ -16,13 +15,16 @@ function Projects() {
     const [projectsFetched, setProjectsFetched] = useState([])
 
     useEffect(() => {
+        // fetch all projects upon page load
         fetchProjects();
     }, []);
 
     useEffect(() => {
+        // once the projects array exists from the fetch, will assign all projects to projects reducer
         if (projectsFetched[0]) {
             dispatch({ type: 'SET_ALL_PROJECTS', payload: projectsFetched });
         }
+        // this useEffect is dependent on change of projectsFetched value (meaning the data has been fetched or changed)
     }, [projectsFetched]);
 
     async function fetchProjects() {
@@ -53,30 +55,23 @@ function Projects() {
     };
 
     return (
-      <>
-        <button onClick={() => handleViewEmployeeTasksClick()}>
-          View your tasks
-        </button>
-        <AddProjectsForm />
-        <ProjectForm />
-        <h1>Your Team's Projects</h1>
-        <div className="projects">
-          {projectsFetched.map((project) => (
-            <div key={project.project_id} className="project">
-              <h2>Project {project.project_name}</h2>
-              <p>Team Size: {project.team_size}</p>
-              <p>Workload: {project.workload}</p>
-              <p>Budget: {project.budget}</p>
-              <p>Completion Time: {project.completion_time}</p>
-              <br />
-              <button onClick={() => handleViewDetailsClick(project)}>
-                View Details
-              </button>
+        <>
+            <button onClick={() => handleViewEmployeeTasksClick()} >View your tasks</button>
+            <h1>Your Team's Projects</h1>
+            <div className="projects">
+                {projectsFetched.map((project) => (
+                    <div key={project.project_id} className="project">
+                        <h2>{project.project_name} Project</h2>
+                        <p>Team Size: {project.team_size}</p>
+                        <p>Workload: {project.workload}</p>
+                        <p>Budget: {project.budget}</p>
+                        <p>Est Completion Time: {project.completion_time} {project.completion_time === 1 ? 'day' : 'days'}</p>
+                        <button onClick={() => handleViewDetailsClick(project)}>View Details</button>
+                    </div>
+                ))}
             </div>
-          ))}
-        </div>
-      </>
-    );
+        </>
+    )
 }
 
 export default Projects;

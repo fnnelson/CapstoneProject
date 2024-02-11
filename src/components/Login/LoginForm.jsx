@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 function LoginForm() {
     const [username, setUsername] = useState('');
@@ -11,6 +11,7 @@ function LoginForm() {
     const login = async (event) => {
         event.preventDefault();
 
+        // if user entered values into both username/password fields
         if (username && password) {
             let credentials = {
                 username: username,
@@ -27,13 +28,16 @@ function LoginForm() {
                 });
 
                 if (response.ok) {
+                    // only ok if username and password match a record of the user collection
                     const res = await response.json();
+                    // obtaining user data ([0] since it's sent as an array), created object
                     let userData = {
                         user_id: res[0].user_id,
                         username: res[0].username,
                         role: res[0].role,
                     }
                     console.log('User successfully GOT the user!', userData);
+                    // send user data to user reducer
                     dispatch({ type: 'SET_USER', payload: userData });
                 } else {
                     console.error('You failed at signing in!');

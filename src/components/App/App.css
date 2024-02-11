@@ -1,6 +1,6 @@
 .project,
 .task {
-  border: 1px solid #ccc;
+  border: 1px solid #bbb;
   border-radius: 5px;
   padding: 20px;
   margin-bottom: 20px;
@@ -17,15 +17,24 @@
   margin: 5px 0;
 }
 
-.project img {
-  max-width: 100%;
-  height: auto;
-  margin-top: 10px;
-}
-
 .tasks-container {
   display: flex;
   justify-content: space-between;
+}
+
+.projects {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.project {
+  width: calc(25% - 20px);
+  margin-bottom: 20px;
+  border: 2px solid #bbb;
+  border-radius: 5px;
+  padding: 20px;
+  background-color: #b5c0c4;
 }
 
 .incomplete-tasks,
@@ -33,6 +42,19 @@
   width: 45%;
 }
 
+.incomplete-tasks .task {
+  background-color: #ddd;
+}
+
 .complete-tasks .task {
-  background-color: green;
+  background-color: rgb(145, 197, 145);
+}
+
+button {
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
+.delete-button {
+  background-color: rgb(252, 120, 120);
 }

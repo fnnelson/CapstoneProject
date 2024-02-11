@@ -30,6 +30,9 @@ function App() {
   );
 }
 
+// if manager will be redirected to the Projects Page, otherwise reg employees will go to EmployeeTasks
+// if not logged in, user will be brought to LoginPage
+
 function LoginOrRedirect({ user }) {
   return user.user_id ? (user.role === "manager" ? <Projects /> : <EmployeeTasks />) : <LoginPage />;
 }
