@@ -10,6 +10,7 @@ model = pickle.load(open("model.pkl", 'rb'))
 
 # Read input data from command-line arguments
 input_data = json.loads(sys.argv[1])
+print("Received input data:", input_data)  # Add this line for debugging
 
 # Convert input data to a pandas DataFrame
 input_df = pd.DataFrame([input_data])
@@ -18,8 +19,8 @@ input_df = pd.DataFrame([input_data])
 input_df = input_df[['team_size', 'budget', 'workload']]
 
 # Perform inference
-prediction = model.predict(input_df)
+prediction = model.predict(input_df)[0][0]
 
 # Print prediction to stdout
-print(f"The estimated completion time is {math.ceil(prediction[0][0])} days.")
+print('{"prediction":', prediction, '}')  # Add this line for debugging
 

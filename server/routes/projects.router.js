@@ -50,31 +50,40 @@ router.get("/:id", (req, res) => {
 });
 
 // POST new project
-// Endpoint for ML Model Inference
+
 router.post("/", (req, res) => {
+  console.log("project POST made it to server", req.body);
+  // mongo query goes here
+  const newProject = req.body;
+  res.status(201).send(newProject);
+});
+
+// Endpoint for ML Model Inference
+router.post("/predict", (req, res) => {
   // Input data for prediction received from front end
   console.log("project POST made it to server", req.body);
   const input_data = req.body;
   console.log("input_data", input_data);
   // Run Python script for inference
-  let options = {
-    mode: "text",
-    pythonPath: "C:/Users/wasadmin/anaconda3/python",
-    pythonOptions: ["-u"], // get print results in real-time
-    scriptPath: "C:/CapstoneProject/",
-    args: [JSON.stringify(input_data)],
-  };
-  PythonShell.run("load_model.py", options, (err, result) => {
-    if (err) {
-      console.error("Error:", err);
-      res.status(500).send("Error performing inference");
-    } else {
-      console.log("Prediction:", result);
-      // Parse the result as JSON, assuming the script returns JSON
-      const prediction = JSON.parse(result);
-      res.status(200).json({ prediction: prediction });
+  PythonShell.run(
+    "load_model.py",
+    { args: [JSON.stringify({ team_size: 3, budget: 2, workload: 3 })] },
+    (err, result) => {
+      if (err) {
+        console.error("Error running Python script:", err);
+        res.status(500).send("Error performing inference");
+      } else {
+        try {
+          console.log("Prediction:", result);
+          const prediction = JSON.parse(result);
+          res.status(200).send({ prediction: prediction });
+        } catch (jsonError) {
+          console.error("Error parsing JSON from Python script:", jsonError);
+          res.status(500).send("Error parsing prediction result");
+        }
+      }
     }
-  });
+  );
 });
 
 // DELETE project
