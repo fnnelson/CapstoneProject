@@ -84,7 +84,7 @@ router.post("/predict", (req, res) => {
   //     }
   //   }
   // );
-  PythonShell.run("load_model.py", {
+  PythonShell.run("./machine_learning/inference.py", {
     args: [JSON.stringify(input_data)],
   })
     .then((result) => {

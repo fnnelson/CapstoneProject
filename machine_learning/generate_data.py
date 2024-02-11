@@ -210,10 +210,10 @@ if __name__ == "__main__":
     tasks_df = tasks()
     projects_df = projects()
 
-    projects_df.to_json('projects.json', orient='records')
-    tasks_df.to_json('tasks.json', orient='records')
-    users_df.to_json('users.json', orient='records')
+    projects_df.to_json('./data/projects.json', orient='records')
+    tasks_df.to_json('./data/tasks.json', orient='records')
+    users_df.to_json('./data/users.json', orient='records')
 
-    projects_df.to_csv('projects.csv', index = False)
-    tasks_df.to_csv('tasks.csv', index = False)
-    users_df.to_csv('users.csv', index = False)
+    projects_df.to_csv('./data/projects.csv', index = False)
+    tasks_df.to_csv('./data/tasks.csv', index = False)
+    users_df.to_csv('./data/users.csv', index = False)

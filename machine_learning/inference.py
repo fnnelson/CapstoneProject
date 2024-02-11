@@ -6,7 +6,7 @@ import pandas as pd
 import math
 
 # Load the machine learning model
-model = pickle.load(open("model.pkl", 'rb'))
+model = pickle.load(open("./machine_learning/model.pkl", 'rb'))
 
 # Read input data from command-line arguments
 input_data = json.loads(sys.argv[1])
