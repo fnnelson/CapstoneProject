@@ -191,10 +191,15 @@ def projects():
         team_size = team_size_pool[i]
 
         # create budget ($)
-        budget = random.randint(1,100) * 1000
+        budget = random.randint(1,100) * 1000 + team_size * 10000
 
         # create workload
-        workload = random.choice(["S", "M", "L"])
+        if completion_time_pool[i] == 1:
+            workload = "S"
+        elif 2 <= completion_time_pool[i] <= 3:
+            workload = "M"
+        else:
+            workload = "L"
 
         # create completion_time (days)
         completion_time = completion_time_pool[i]
