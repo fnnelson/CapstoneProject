@@ -19,6 +19,11 @@ const ProjectForm = () => {
     setProject({ ...project, [name]: numericValue });
   };
 
+  const handleText = (e) => {
+    const { name, value } = e.target;
+    setProject({ ...project, [name]: value });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("project to be sent:", project);
@@ -53,6 +58,7 @@ const ProjectForm = () => {
             name="team_size"
             value={project.team_size}
             onChange={handleChange}
+            placeholder="min. 1"
           />
         </label>
         <br />
@@ -63,16 +69,19 @@ const ProjectForm = () => {
             name="budget"
             value={project.budget}
             onChange={handleChange}
+            placeholder="min. $10000"
           />
         </label>
         <br />
         <label>
           Workload:
           <input
-            type="number"
+            type="text"
             name="workload"
             value={project.workload}
-            onChange={handleChange}
+            onChange={handleText}
+            pattern="[SMLsml]"
+            placeholder="Enter S, M, or L"
           />
         </label>
         <br />

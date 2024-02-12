@@ -8,18 +8,22 @@ import math
 # Load the machine learning model
 model = pickle.load(open("./machine_learning/model.pkl", 'rb'))
 
+# Initiate dataFrame
+df = pd.DataFrame(columns = ["team_size", "budget", "workload_L", "workload_M", "workload_S"])
+
 # Read input data from command-line arguments
 input_data = json.loads(sys.argv[1])
 
-# Convert input data to a pandas DataFrame
-input_df = pd.DataFrame([input_data])
-
-# Select relevant columns (adjust column names as needed)
-input_df = input_df[['team_size', 'budget', 'workload']]
+# Add input data to a pandas DataFrame
+df["team_size"] = [input_data['team_size']]
+df["budget"] = [input_data['budget']]
+df["workload_L"] = [input_data['workload'] == 'L']
+df["workload_M"] = [input_data['workload'] == 'M']
+df["workload_S"] = [input_data['workload'] == 'S']
 
 # Perform inference
-prediction = math.ceil(model.predict(input_df)[0][0])
+prediction = math.ceil(model.predict(df)[0][0])
 
 # Print prediction to stdout
-print(prediction)  # Add this line for debugging
+print(prediction)  
 
