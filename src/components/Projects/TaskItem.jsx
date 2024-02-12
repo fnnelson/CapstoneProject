@@ -117,7 +117,7 @@ function TaskItem({ task, fetchTasks, fetchAppropriateTasks }) {
     return (
         <div className="task">
             <h2>Task: {task.description}</h2>
-            <p>Task #: {task.task_id}</p>
+            {/*<p>Task #: {task.task_id}</p>*/}
             <p>Due Date: {task.due_date}</p>
             <p>Estimated Duration: {task.estimated_duration} {task.estimated_duration === 1 ? 'hour' : 'hours'}</p>
             <br />

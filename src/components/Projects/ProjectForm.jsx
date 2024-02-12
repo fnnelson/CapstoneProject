@@ -49,10 +49,10 @@ const ProjectForm = () => {
 
   return (
     <div>
-      <h2>Project Form</h2>
+      <h3>DEADLINE INSIGHT</h3>
       <form onSubmit={handleSubmit}>
         <label>
-          Team Size:
+          Team Size:&nbsp;
           <input
             type="number"
             name="team_size"
@@ -63,7 +63,7 @@ const ProjectForm = () => {
         </label>
         <br />
         <label>
-          Budget:
+          Budget:&nbsp;
           <input
             type="number"
             name="budget"
@@ -74,7 +74,7 @@ const ProjectForm = () => {
         </label>
         <br />
         <label>
-          Workload:
+          Workload:&nbsp;
           <input
             type="text"
             name="workload"
@@ -87,7 +87,11 @@ const ProjectForm = () => {
         <br />
         <button type="submit">Predict Completion Time</button>
       </form>
-      {prediction && <p>Predicted Completion Time: {prediction} days</p>}
+      {prediction && (
+        <h3 style={{ color: "green" }}>
+          Predicted Completion Time: {prediction} days
+        </h3>
+      )}
     </div>
   );
 };

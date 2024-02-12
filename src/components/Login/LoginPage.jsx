@@ -15,9 +15,9 @@ function LoginPage() {
 
     // if the user is not logged in, render the login form
     return (
-        <div>
-            <LoginForm />
-        </div>
+      <div className="login-background">
+        <LoginForm />
+      </div>
     );
 
 }

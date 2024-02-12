@@ -31,10 +31,10 @@
 .project {
   width: calc(25% - 20px);
   margin-bottom: 20px;
-  border: 2px solid #bbb;
+  border: 1px solid black;
   border-radius: 5px;
   padding: 20px;
-  background-color: #b5c0c4;
+  background-color: #333333;
 }
 
 .incomplete-tasks,
@@ -57,4 +57,18 @@ button {
 
 .delete-button {
   background-color: rgb(252, 120, 120);
+}
+
+.login-background {
+  background-image: url("https://wallpaperxyz.com/wp-content/uploads/Pokemon-BG-Wallpaper-FHD-Download-Free-For-Desktop-Laptop-Macbook-0958-Wallpaperxyz.com-33.jpg");
+  border: 1px solid black;
+  background-size: contain;
+  background-repeat: round;
+  background-position: left;
+  min-height: 60vh;
+  padding-top: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  padding-left: 20px;
+  color: black; /* Set text color */
 }
