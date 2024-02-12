@@ -12,8 +12,9 @@ import LoginPage from "../Login/LoginPage";
 import "./App.css";
 import EmployeeTasks from "../Projects/EmployeeTasks";
 
-const img =
+const img1 =
   "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/3bb52058-0095-4587-b4c5-8b5c9685bc8c/dg0nurt-5c69b963-05b0-4bb7-8082-94060adcd0ff.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzNiYjUyMDU4LTAwOTUtNDU4Ny1iNGM1LThiNWM5Njg1YmM4Y1wvZGcwbnVydC01YzY5Yjk2My0wNWIwLTRiYjctODA4Mi05NDA2MGFkY2QwZmYucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.Z3dRf8arsjmaWgNYEFNXDK4rsbOQZ0ocBBlzDDMJZms";
+
 function App() {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.user);
@@ -31,7 +32,7 @@ function App() {
       }}
     >
       <div style={{ display: "flex", alignItems: "center" }}>
-        <img src={img} alt="Poke Mon Go Logo" width="50" height="50" />
+        <img src={img1} alt="Poke Mon Go Logo 1" width="50" height="50" />
         <h1
           style={{
             display: "inline-block",

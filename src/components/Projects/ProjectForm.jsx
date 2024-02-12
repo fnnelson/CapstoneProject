@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 
+const img2 =
+  "https://www.pngall.com/wp-content/uploads/5/Pokemon-Pikachu-PNG-Image-File.png";
+
 const ProjectForm = () => {
   const urlBase = "http://localhost:3000";
   const [project, setProject] = useState({
@@ -19,7 +22,7 @@ const ProjectForm = () => {
     setProject({ ...project, [name]: numericValue });
   };
 
-  const handleText = (e) => {
+  const handleSelect = (e) => {
     const { name, value } = e.target;
     setProject({ ...project, [name]: value });
   };
@@ -59,6 +62,9 @@ const ProjectForm = () => {
             value={project.team_size}
             onChange={handleChange}
             placeholder="min. 1"
+            min="1"
+            step="1"
+            max="10"
           />
         </label>
         <br />
@@ -70,27 +76,40 @@ const ProjectForm = () => {
             value={project.budget}
             onChange={handleChange}
             placeholder="min. $10000"
+            min="10000"
+            step="1000"
           />
         </label>
         <br />
         <label>
           Workload:&nbsp;
-          <input
-            type="text"
+          <select
             name="workload"
             value={project.workload}
-            onChange={handleText}
-            pattern="[SMLsml]"
-            placeholder="Enter S, M, or L"
-          />
+            onChange={handleSelect}
+          >
+            <option value="S">Small</option>
+            <option value="M">Medium</option>
+            <option value="L">Large</option>
+          </select>
         </label>
         <br />
         <button type="submit">Predict Completion Time</button>
       </form>
       {prediction && (
-        <h3 style={{ color: "green" }}>
-          Predicted Completion Time: {prediction} days
-        </h3>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <h3
+            style={{
+              display: "inline-block",
+              marginLeft: "10px",
+              color: "green",
+            }}
+          >
+            Estimated Completion Time: {prediction} days
+          </h3>
+          &nbsp;&nbsp;
+          <img src={img2} alt="Poke Mon Go Logo 2" width="50" height="50" />
+        </div>
       )}
     </div>
   );
