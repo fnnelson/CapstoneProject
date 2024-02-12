@@ -44,32 +44,34 @@ function EmployeeTasks() {
     const completeTasks = tasks.filter(task => task.status === 'complete');
 
     return (
-        <div>
-            <h1>Welcome back, Valued Employee # {user.user_id}!</h1>
-            <h1>Your Assigned Tasks</h1>
-            <div className="tasks-container">
-                <div className="incomplete-tasks">
-                    <h2>Incomplete ({incompleteTasks.length})</h2>
-                    {incompleteTasks.map((task) => (
-                        <TaskItem
-                            key={task.task_id}
-                            task={task}
-                            fetchAppropriateTasks={fetchEmployeeTasks}
-                            urlBase={urlBase} />
-                    ))}
-                </div>
-                <div className="complete-tasks">
-                    <h2>Complete ({completeTasks.length})</h2>
-                    {completeTasks.map((task) => (
-                        <TaskItem
-                            key={task.task_id}
-                            task={task}
-                            fetchAppropriateTasks={fetchEmployeeTasks}
-                            urlBase={urlBase} />
-                    ))}
-                </div>
-            </div>
+      <div>
+        <h1>Welcome back, {user.username.match(/^([a-zA-Z]+)/)[0]}!</h1>
+        <h1>Your Assigned Tasks</h1>
+        <div className="tasks-container">
+          <div className="incomplete-tasks">
+            <h2>Incomplete ({incompleteTasks.length})</h2>
+            {incompleteTasks.map((task) => (
+              <TaskItem
+                key={task.task_id}
+                task={task}
+                fetchAppropriateTasks={fetchEmployeeTasks}
+                urlBase={urlBase}
+              />
+            ))}
+          </div>
+          <div className="complete-tasks">
+            <h2>Complete ({completeTasks.length})</h2>
+            {completeTasks.map((task) => (
+              <TaskItem
+                key={task.task_id}
+                task={task}
+                fetchAppropriateTasks={fetchEmployeeTasks}
+                urlBase={urlBase}
+              />
+            ))}
+          </div>
         </div>
+      </div>
     );
 }
 
